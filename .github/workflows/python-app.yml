@@ -24,3 +24,9 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+      env:
+        PROJECT_NAME: FASTAPI_TEMPLATE
+        POSTGRES_USER: a
+        POSTGRES_PASSWORD: b
+        POSTGRES_SERVER: c
+        POSTGRES_DB: d
