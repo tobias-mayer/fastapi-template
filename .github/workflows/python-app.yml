@@ -23,10 +23,10 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       env:
-        PROJECT_NAME: FASTAPI_TEMPLATE
-        POSTGRES_USER: a
-        POSTGRES_PASSWORD: b
-        POSTGRES_SERVER: sqlite:///./test.db
-        POSTGRES_DB: d
+        PROJECT_NAME: "FASTAPI_TEMPLATE"
+        POSTGRES_USER: "a"
+        POSTGRES_PASSWORD: "b"
+        POSTGRES_SERVER: "sqlite:///./test.db"
+        POSTGRES_DB: "d"
       run: |
         pytest
