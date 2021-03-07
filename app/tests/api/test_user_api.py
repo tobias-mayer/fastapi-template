@@ -36,6 +36,5 @@ def test_create_user_already_exists(
         '/users/', json=payload,
     )
 
-    created_user = response.json()
     assert response.status_code == 400
     
