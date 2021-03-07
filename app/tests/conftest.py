@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 import pytest
 
 from app.main import app
-from app.api.deps import get_db
+from app.api import deps
 from app.models.base_model import BaseModel
 
 SQLALCHEMY_DATABASE_URL = 'sqlite:///./test.db'
@@ -23,7 +23,7 @@ BaseModel.metadata.create_all(bind=engine)
 
 
 @pytest.fixture(scope='session')
-def db() -> Session:
+def db() -> Generator:
     try:
         db = TestingSessionLocal()
         yield db
@@ -35,9 +35,13 @@ def db() -> Session:
 @pytest.fixture(scope='module')
 def client() -> Generator:
 
-    def _get_db_override():
-        return db
-    app.dependency_overrides[get_db] = _get_db_override
+    def _get_db_override() -> Generator:
+        try:
+            db = TestingSessionLocal()
+            yield db
+        finally:
+            db.close()
+    app.dependency_overrides[deps.get_db] = _get_db_override
 
     with TestClient(app) as c:
         yield c
