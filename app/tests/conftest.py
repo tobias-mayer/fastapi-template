@@ -1,7 +1,7 @@
-from typing import Dict, Generator
+from typing import Generator
 import os
 
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
 
 from fastapi.testclient import TestClient

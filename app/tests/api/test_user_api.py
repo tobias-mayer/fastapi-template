@@ -37,4 +37,3 @@ def test_create_user_already_exists(
     )
 
     assert response.status_code == 400
-    

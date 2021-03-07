@@ -2,12 +2,13 @@ from pydantic import BaseSettings, PostgresDsn, validator
 from typing import Optional, Dict, Any
 import secrets
 
+
 class AppSettings(BaseSettings):
     PROJECT_NAME: str
 
     SECRET_KEY = secrets.token_urlsafe(32)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 20
-    
+
     POSTGRES_SERVER: str
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
@@ -26,5 +27,6 @@ class AppSettings(BaseSettings):
             host=values.get('POSTGRES_SERVER'),
             path=f"/{values.get('POSTGRES_DB') or ''}",
         )
+
 
 app_settings = AppSettings()

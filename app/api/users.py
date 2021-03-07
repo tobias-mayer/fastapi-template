@@ -1,20 +1,21 @@
 from typing import Any
 
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.api import deps
-from app import schemas, models
+from app import schemas
 from app.db import operations
 
 router = APIRouter()
+
 
 @router.post("/", response_model=schemas.User)
 def create_user(
     *,
     db: Session = Depends(deps.get_db),
     user_in: schemas.UserCreate,
-    #current_user: models.User = Depends(deps.get_current_active_user),
+    # current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Create new user.

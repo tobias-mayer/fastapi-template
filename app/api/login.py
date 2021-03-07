@@ -1,18 +1,18 @@
 from datetime import timedelta
 from typing import Any
 
-from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from app import models, schemas
+from app import schemas
 from app.db import operations
 from app.api import deps
 from app.core import security
 from app.core.config import app_settings
-from app.core.security import get_password_hash
 
 router = APIRouter()
+
 
 @router.post("/login/", response_model=schemas.Token)
 def login_access_token(

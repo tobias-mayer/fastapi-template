@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from app.db import operations
 from app.schemas.user import UserCreate
 
+
 def test_create_user(db: Session) -> None:
     email = 'test@gmail.com'
     password = 'test1234'
@@ -10,6 +11,7 @@ def test_create_user(db: Session) -> None:
     user = operations.user_operations.create(db, obj_in=user_in)
     assert user.email == email
     assert hasattr(user, 'hashed_password')
+
 
 def test_authenticate_user(db: Session) -> None:
     email = 'test1@gmail.com'
@@ -20,6 +22,7 @@ def test_authenticate_user(db: Session) -> None:
     assert authenticated_user
     assert user.email == authenticated_user.email
 
+
 def test_get_by_email(db: Session) -> None:
     email = 'get_by_email@gmail.com'
     password = 'test1234'
@@ -29,6 +32,7 @@ def test_get_by_email(db: Session) -> None:
     assert user.id == search_result.id
     assert user.email == search_result.email
     assert user.is_active == search_result.is_active
+
 
 def test_is_active(db: Session) -> None:
     email = 'is_active@gmail.com'
